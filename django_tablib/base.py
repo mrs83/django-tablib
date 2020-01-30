@@ -91,5 +91,7 @@ def resolve_related_value(obj, attr):
     related_field = obj
     for field in fields:
         related_field = getattr(related_field, field)
+        if related_field is None:
+            break
 
     return related_field
