@@ -93,4 +93,3 @@ def resolve_related_value(obj, attr):
         related_field = getattr(related_field, field)
 
     return related_field
-
