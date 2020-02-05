@@ -54,10 +54,7 @@ class BaseDataset(tablib.Dataset):
                 if hasattr(obj, 'get_{0}_display'.format(attr)):
                     value = getattr(obj, 'get_{0}_display'.format(attr))()
                 else:
-                    if '.' in attr:
-                        value = resolve_related_value(obj, attr)
-                    else:
-                        value = getattr(obj, attr)
+                    value = get_attribute_value(obj, attr)
                 attr = self._cleanval(value, attr)
             attrs.append(attr)
         return attrs
@@ -86,7 +83,7 @@ class BaseDataset(tablib.Dataset):
         super(BaseDataset, self).append(row=row, col=col)
 
 
-def resolve_related_value(obj, attr):
+def get_attribute_value(obj, attr):
     fields = attr.split('.')
     related_field = obj
     for field in fields:
