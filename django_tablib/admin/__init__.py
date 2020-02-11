@@ -110,6 +110,7 @@ class TablibAdmin(admin.ModelAdmin):
             self.list_max_show_all,
             self.list_editable,
             self,
+            self.sortable_by
         )
         return cl.get_queryset(request)
 
