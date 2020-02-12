@@ -25,7 +25,7 @@ class DjangoTablibTestCase(TestCase):
         self.assertTrue('field2' in data.headers)
         self.assertTrue('Field 1' in data.headers)
 
-        self.assertEqual(data[0][0], data[0][1])
+        self.assertEqual(data[0][1], data[0][2]])
 
     def test_meta_fields(self):
         class TestModelDataset(ModelDataset):
