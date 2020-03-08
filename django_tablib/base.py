@@ -54,7 +54,7 @@ class BaseDataset(tablib.Dataset):
                 if hasattr(obj, 'get_{0}_display'.format(attr)):
                     value = getattr(obj, 'get_{0}_display'.format(attr))()
                 else:
-                    value = getattr(obj, attr)
+                    value = get_attribute_value(obj, attr)
                 attr = self._cleanval(value, attr)
             attrs.append(attr)
         return attrs
@@ -81,3 +81,14 @@ class BaseDataset(tablib.Dataset):
             row = django_object
 
         super(BaseDataset, self).append(row=row, col=col)
+
+
+def get_attribute_value(obj, attr):
+    fields = attr.split('.')
+    related_field = obj
+    for field in fields:
+        related_field = getattr(related_field, field)
+        if related_field is None:
+            break
+
+    return related_field
